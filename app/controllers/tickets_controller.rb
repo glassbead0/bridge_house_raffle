@@ -1,3 +1,5 @@
+include ActionView::Helpers::TextHelper
+
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
@@ -35,7 +37,7 @@ class TicketsController < ApplicationController
       ticket.save
     end
     if @tickets.first.save
-      redirect_to '/thank_you/index', notice: "Thank you for buying #{number_of_tickets} tickets #{@tickets[0].first_name}"
+      redirect_to '/thank_you/index', notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@tickets[0].first_name}"
     else
       @ticket = @tickets.first
       render :new

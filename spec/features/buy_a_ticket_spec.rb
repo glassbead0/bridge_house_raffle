@@ -17,6 +17,6 @@ feature 'buy a ticket' do
 
     click_button 'Buy Tickets'
 
-    expect(page).to have_text "Thanks for buying a raffle ticket Aaron"
+    expect(page).to have_text "Thank you for buying 1 raffle ticket Aaron"
   end
 end

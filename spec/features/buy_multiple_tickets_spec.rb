@@ -8,7 +8,7 @@ feature 'buy multiple tickets' do
       fill_out_ticket
       select '12', from: 'Number of tickets'
       click_button 'Buy Ticket'
-      expect(page).to have_text 'Thank for buying 12 Tickets Aaron'
+      expect(page).to have_text 'Thank you for buying 12 raffle tickets Aaron'
     }.to change(Ticket, :count).by(12)
 
   end
