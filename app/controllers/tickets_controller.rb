@@ -24,16 +24,21 @@ class TicketsController < ApplicationController
   # POST /tickets
   # POST /tickets.json
   def create
-    @ticket = Ticket.new(ticket_params)
+    @tickets = []
+    number_of_tickets = params[:number_of_tickets].to_i
 
-    respond_to do |format|
-      if @ticket.save
-        format.html { redirect_to @ticket, notice: "Thanks for buying a ticket #{@ticket.first_name.titleize}" }
-        format.json { render :show, status: :created, location: @ticket }
-      else
-        format.html { render :new }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
-      end
+    number_of_tickets.times do |num|
+      @tickets[num] = Ticket.new(ticket_params)
+    end
+
+    @tickets.each do |ticket|
+      ticket.save
+    end
+    if @tickets.first.save
+      redirect_to '/thank_you/index', notice: "Thank you for buying #{number_of_tickets} tickets #{@tickets[0].first_name}"
+    else
+      @ticket = @tickets.first
+      render :new
     end
   end
 
@@ -69,6 +74,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:first_name, :last_name, :email, :subscribe, :address_line_one, :address_line_two, :city, :state, :zip_code)
+      params.require(:ticket).permit(:first_name, :last_name, :email, :subscribe, :address_line_one, :address_line_two, :city, :state, :zip_code, :phone_number)
     end
 end

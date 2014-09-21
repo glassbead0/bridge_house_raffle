@@ -48,3 +48,22 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+module FillOutTicketHelper
+  def fill_out_ticket
+    visit '/'
+    fill_in 'First name', with: 'Aaron'
+    fill_in 'Last name', with: Faker::Name.last_name
+    fill_in 'Email', with: Faker::Internet.email
+    fill_in 'Address line one', with: Faker::Address.street_address
+    fill_in 'Address line two', with: Faker::Address.secondary_address
+    fill_in 'City', with: Faker::Address.city_prefix + Faker::Address.city_suffix
+    fill_in 'State', with: Faker::Address.state_abbr
+    fill_in 'Zip code', with: Faker::Address.zip
+    fill_in 'Phone number', with: Faker::PhoneNumber.phone_number
+  end
+end
+
+RSpec.configure do |config|
+  config.include FillOutTicketHelper
+end
