@@ -1,3 +1,12 @@
+<script>
+  var price = document.getElementById('price');
+  var numberOfTickets = document.getElementById('number_of_tickets');
+
+  function updatPriceLabel(){
+    price.value = numberOfTickets.value * 10
+  }
+</script>
+
 <%= form_for(@ticket, :html => { :class => "form-horizontal" }) do |f| %>
   <% if @ticket.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
@@ -14,12 +23,17 @@
 
   <div class="bs-callout bs-callout-info">
     <div class="form-group">
-      <%= f.label :first_name, :class => "col-sm-2 control-label" %>
-      <div class="col-sm-4">
+
+      <%= f.label :first_name, 'Name: First', :class => "col-sm-2 control-label" %>
+      <div class="col-sm-3">
         <%= f.text_field :first_name, :class => "form-control" %>
       </div>
-      <%= f.label :last_name, :class => "col-sm-2 control-label" %>
-      <div class="col-sm-4">
+      <%= f.label :middle_initial, 'M.I.', class: 'col-sm-1 control-label' %>
+      <div class="col-sm-1">
+        <%= f.text_field :middle_initial, class: 'form-control' %>
+      </div>
+      <%= f.label :last_name, 'Last', :class => "col-sm-1 control-label" %>
+      <div class="col-sm-3">
         <%= f.text_field :last_name, :class => "form-control" %>
       </div>
     </div>
@@ -81,6 +95,8 @@
       <div class="col-sm-offset-0 col-sm-4">
         <%= f.submit 'Buy Tickets', :class => "btn btn-primary" %>
       </div>
+      <div id="price">10</div>
+
     </div>
   </div>
 

@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20140921215425) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phone_number"
+    t.string   "middle_initial"
   end
 
 end
