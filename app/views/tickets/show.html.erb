@@ -1,13 +1,12 @@
 <div class="page-header">
-  <%= link_to tickets_path, :class => 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Back
+  <% if current_admin %>
+    <%= link_to edit_ticket_path(@ticket), :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+      Edit
+    <% end %>
   <% end %>
-  <%= link_to edit_ticket_path(@ticket), :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Edit
-  <% end %>
-  <h1>Show ticket</h1>
+
+  <h1>Thank You!</h1>
 </div>
 
 <dl class="dl-horizontal">
@@ -39,3 +38,9 @@
   <dd><%= @ticket.zip_code %></dd>
 
 </dl>
+<div align="center">
+  <%= link_to new_ticket_path, class: 'btn btn-success btn-lg' do %>
+    <span class="glyphicon glyphicon-home"></span>
+    Buy more tickets
+  <% end %>
+</div>

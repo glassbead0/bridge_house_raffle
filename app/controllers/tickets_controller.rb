@@ -2,11 +2,19 @@ include ActionView::Helpers::TextHelper
 
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_admin, only: [:index, :edit, :update, :destroy]
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.paginate(page: params[:page], per_page: 50)
+    @all_tickets = Ticket.all
+
+    
+    respond_to do |format|
+      format.html
+      format.csv { send_data @all_tickets.to_csv }
+      format.xls { send_data @all_tickets.to_csv(col_sep: "\t") }
+    end
   end
 
   # GET /tickets/1
@@ -36,10 +44,11 @@ class TicketsController < ApplicationController
     @tickets.each do |ticket|
       ticket.save
     end
-    if @tickets.first.save
-      redirect_to '/thank_you/index', notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@tickets[0].first_name}"
+
+    @ticket = @tickets.first
+    if @ticket.save
+      redirect_to ticket_path(@ticket), notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@tickets[0].first_name}"
     else
-      @ticket = @tickets.first
       render :new
     end
   end
