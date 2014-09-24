@@ -6,10 +6,12 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.paginate(page: params[:page], per_page: 50)
+    #@tickets = Ticket.paginate(page: params[:page], per_page: 50)
     @all_tickets = Ticket.all
 
-    
+    @q = Ticket.search(params[:q])
+    @tickets = @q.result(distinct: true).paginate(page: params[:page], per_page: 50)
+
     respond_to do |format|
       format.html
       format.csv { send_data @all_tickets.to_csv }
