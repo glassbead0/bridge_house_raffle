@@ -4,5 +4,5 @@
   <li><a href="#">Logged in as <%= current_admin.email %></a></li>
   <li><%= link_to 'Start Event', new_event_path %></li>
 <% elsif current_admin && current_admin.event %>
-  <li><%= link_to "End #{current_admin.event.name}", event_path(current_admin.event), method: 'delete', data: { alert: 'Are you sure?' } %></li>
+  <li><%= link_to "End #{current_admin.event.name}", event_path(current_admin.event), method: 'delete', data: { confirm: 'Are you sure?' } %></li>
 <% end %>

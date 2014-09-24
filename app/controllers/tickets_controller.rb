@@ -42,6 +42,7 @@ class TicketsController < ApplicationController
     end
 
     @tickets.each do |ticket|
+      ticket.location = current_admin.event.name if current_admin.event
       ticket.save
     end
 
