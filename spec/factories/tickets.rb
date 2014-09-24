@@ -10,6 +10,7 @@ FactoryGirl.define do
     address_line_two { Faker::Address.secondary_address}
     city { Faker::Address.city_prefix + Faker::Address.city_suffix }
     state { Faker::Address.state_abbr }
+    phone_number { Faker::PhoneNumber.phone_number }
     zip_code { Faker::Address.zip }
   end
 end

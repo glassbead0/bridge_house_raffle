@@ -5,7 +5,8 @@ feature 'buy multiple tickets' do
 
     expect {
       visit '/'
-      fill_out_ticket
+      stubbed_ticket = FactoryGirl.build_stubbed(:ticket)
+      fill_out_ticket(stubbed_ticket)
       select '12', from: 'Number of tickets'
       click_button 'Buy Ticket'
       expect(page).to have_text 'Thank you for buying 12 raffle tickets Aaron'

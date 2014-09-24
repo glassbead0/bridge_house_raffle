@@ -4,8 +4,8 @@ feature 'buy a ticket' do
   scenario 'can buy one ticket' do
     visit '/'
 
-    fill_in 'First name', with: 'Aaron'
-    fill_in 'Last name', with: 'Glasenapp'
+    fill_in 'Name: First', with: 'Aaron'
+    fill_in 'Last', with: 'Glasenapp'
     fill_in 'Email', with: 'glassbead@gmail.com'
     check 'Receive BH Emails'
     fill_in 'Address line one', with: '123 Something St.'

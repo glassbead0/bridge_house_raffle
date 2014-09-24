@@ -50,20 +50,29 @@ RSpec.configure do |config|
 end
 
 module FillOutTicketHelper
-  def fill_out_ticket
+  def fill_out_ticket(ticket)
     visit '/'
-    fill_in 'First name', with: 'Aaron'
-    fill_in 'Last name', with: Faker::Name.last_name
-    fill_in 'Email', with: Faker::Internet.email
-    fill_in 'Address line one', with: Faker::Address.street_address
-    fill_in 'Address line two', with: Faker::Address.secondary_address
-    fill_in 'City', with: Faker::Address.city_prefix + Faker::Address.city_suffix
-    fill_in 'State', with: Faker::Address.state_abbr
-    fill_in 'Zip code', with: Faker::Address.zip
-    fill_in 'Phone number', with: Faker::PhoneNumber.phone_number
+    fill_in 'Name: First', with: 'Aaron'
+    fill_in 'Last', with: ticket.last_name
+    fill_in 'Email', with: ticket.email
+    fill_in 'Address line one', with: ticket.address_line_one
+    fill_in 'City', with: ticket.city
+    fill_in 'State', with: ticket.state
+    fill_in 'Zip code', with: ticket.zip_code
+    fill_in 'Phone number', with: ticket.phone_number
+  end
+end
+
+module AdminHelper
+  def login(admin)
+    visit '/admins/sign_in'
+    fill_in 'Email', with: admin.email
+    fill_in 'Password', with: admin.password
+    click_button 'Log in'
   end
 end
 
 RSpec.configure do |config|
   config.include FillOutTicketHelper
+  config.include AdminHelper
 end
