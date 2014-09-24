@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :admins, controllers: { registrations: "admins/registrations" }
+  get 'events/new'
+
+  get 'events/create'
+
+  devise_for :admins, controllers: { registrations: "admins/registrations", sessions: 'admins/sessions' }
   get 'thank_you/index'
 
   resources :tickets
 
-  #get 'new_event' => ''
+  resources :events
+  # get 'start_event' => 'events#new'
+  # post 'create_event' => 'events#create'
+  # delete 'event/:id' => 'events#delete', as: 'delete_event'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

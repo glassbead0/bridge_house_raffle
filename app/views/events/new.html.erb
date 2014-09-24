@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h2>Start an Event</h2>
+</div>
+<%= form_for(@event, class: 'form-horiztonal') do |f| %>
+  <div class="form-group row">
+    <%= f.label :name, class: 'control-label col-sm-2' %>
+    <div class="col-sm-4">
+      <%= f.text_field :name, class: 'control-label', autofocus: true %>
+    </div>
+  </div>
+
+  <div><%= f.submit "Start", class: 'btn btn-success col-sm-offset-2' %></div>
+<% end %>
