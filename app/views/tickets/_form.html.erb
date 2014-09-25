@@ -32,11 +32,10 @@
     </div>
   <% end %>
 
-
-  <input type=button style="float: right" class='btn btn-success btn-sm' value="^" onclick="showHide();">
-
-  <% if true #if params[:set_payment] %>
+  <% if params[:set_payment] %>
     <div class="bs-callout bs-callout-danger" id="hide_panel" style="visibility: visible">
+      <input type=button style="float: right" class='btn btn-default btn-sm' value="^" onclick="showHide();">
+
       <div class="form-group row">
         <%= f.label :payment_type, class: 'control-label col-sm-2' %>
         <div class="col-sm-4">
@@ -134,7 +133,7 @@
 
   <div class="bs-callout bs-callout-info">
     <div class="form-group">
-      <% unless false #unless params[:set_payment] %>
+      <% unless params[:set_payment] %>
         <%= f.label :number_of_tickets, nil, class: 'col-sm-2 control-label' %>
         <div class="col-sm-1">
           <%= f.select :number_of_tickets, options_for_select((1..100).to_a), class: "form-control" %>

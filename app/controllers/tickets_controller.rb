@@ -24,6 +24,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
+    #raise params.inspect
     @ticket = Ticket.new
   end
 
