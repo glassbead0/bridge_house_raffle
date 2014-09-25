@@ -2,7 +2,7 @@ include ActionView::Helpers::TextHelper
 
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin, only: [:index, :edit, :update, :destroy]
+  before_action :require_admin, only: [:index, :edit, :update, :destroy, :set_payment_type]
   # GET /tickets
   # GET /tickets.json
   def index
@@ -86,6 +86,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:location, :first_name, :middle_initial, :last_name, :email, :subscribe, :address_line_one, :address_line_two, :city, :state, :zip_code, :phone_number)
+      params.require(:ticket).permit(:location, :first_name, :middle_initial, :last_name, :email, :subscribe, :address_line_one, :address_line_two, :city, :state, :zip_code, :phone_number, :number_of_tickets, :payment_type, :amount_paid, :last_four_digits_of_card)
     end
 end

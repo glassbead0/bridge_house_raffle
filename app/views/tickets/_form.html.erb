@@ -1,10 +1,21 @@
-<script>
+<script type="text/javascript">
   var price = document.getElementById('price');
   var numberOfTickets = document.getElementById('number_of_tickets');
 
   function updatPriceLabel(){
     price.value = numberOfTickets.value * 10
   }
+
+
+  function showHide() {
+    var panel = document.getElementById('hide_panel');
+    if (panel.style.visibility == 'hidden') {
+      panel.style.visibility = 'visible';
+    } else if (panel.style.visibility == 'visible') {
+      panel.style.visibility = 'hidden';
+    }
+  }
+
 </script>
 
 <%= form_for(@ticket, :html => { :class => "form-horizontal" }) do |f| %>
@@ -18,6 +29,41 @@
         <li><%= msg %></li>
       <% end %>
       </ul>
+    </div>
+  <% end %>
+
+
+  <input type=button style="float: right" class='btn btn-success btn-sm' value="^" onclick="showHide();">
+
+  <% if true #if params[:set_payment] %>
+    <div class="bs-callout bs-callout-danger" id="hide_panel" style="visibility: visible">
+      <div class="form-group row">
+        <%= f.label :payment_type, class: 'control-label col-sm-2' %>
+        <div class="col-sm-4">
+          <%= f.select :payment_type, options_for_select(%w(WePay Square Cash Check Other)), class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :number_of_tickets, class: 'control-label col-sm-2' do %>
+          Number of Tickets <br/><span style="color: #aaa">(if applicable)</span>
+        <% end %>
+        <div class="col-sm-4">
+          <%= f.select :number_of_tickets, options_for_select((1..100).to_a),  include_blank: true, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <%= f.label :amount_paid, class: 'control-label col-sm-2' do %>
+          Amount Paid <br/> <span style="color: #aaa">(if applicable)</span>
+        <% end %>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <%= f.text_field :amount_paid, class: 'form-control' %>
+          </div><!-- /input-group -->
+        </div><!-- /.col-sm-4 -->
+      </div>
     </div>
   <% end %>
 
@@ -88,10 +134,13 @@
 
   <div class="bs-callout bs-callout-info">
     <div class="form-group">
-      <%= label_tag :number_of_tickets, nil, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-1">
-        <%= select_tag :number_of_tickets, options_for_select((1..100).to_a), class: "form-control" %>
-      </div>
+      <% unless false #unless params[:set_payment] %>
+        <%= f.label :number_of_tickets, nil, class: 'col-sm-2 control-label' %>
+        <div class="col-sm-1">
+          <%= f.select :number_of_tickets, options_for_select((1..100).to_a), class: "form-control" %>
+        </div>
+      <% end %>
+
       <div class="col-sm-offset-0 col-sm-4">
         <%= f.submit 'Buy Tickets', :class => "btn btn-primary" %>
       </div>

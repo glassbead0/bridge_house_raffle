@@ -43,6 +43,10 @@
             <th>Zip code</th>
             <th>Phone</th>
             <th>Location</th>
+            <th>Payment</th>
+            <th>#Tickets</th>
+            <th>$Paid</th>
+            <th>last4</th>
             <th></th>
         <th></th>
         <th></th>
@@ -66,6 +70,10 @@
             <td><%= ticket.zip_code %></td>
             <td><%= ticket.phone_number %></td>
             <td><%= ticket.location %></td>
+            <td><%= ticket.payment_type %></td>
+            <td><%= ticket.number_of_tickets %></td>
+            <td><%= ticket.amount_paid %></td>
+            <td><%= ticket.last_four_digits_of_card %></td>
             <td><%= link_to 'Show', ticket %></td>
         <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
         <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
