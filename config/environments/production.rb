@@ -1,6 +1,21 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.default_url_options = { host: 'http://bridgehouseraffle.herokuapp.com' }
+  config.action_mailer.deliver_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.sendgrid.net",
+    :port => 25,
+    :domain => "http://bridgehouseraffle.herokuapp.com",
+    :authentication => :plain,
+    :user_name => 'glassbead0',
+    :password => ENV['SENDGRID_PW']
+  }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
