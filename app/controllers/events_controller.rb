@@ -6,9 +6,14 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    current_admin.event = @event
-    redirect_to new_ticket_path, notice: "Started event at #{@event.name}"
+    if @event.save
+      current_admin.event = @event
+      redirect_to new_ticket_path, notice: "Started event at #{@event.name}"
+    else
+      render :new
+    end
   end
+
 
   def destroy
     @event = current_admin.event
