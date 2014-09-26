@@ -37,19 +37,18 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @tickets = []
-    number_of_tickets = params[:number_of_tickets].to_i
+    number_of_tickets = params[:ticket][:number_of_tickets].to_i
 
     number_of_tickets.times do |num|
       @tickets[num] = Ticket.new(ticket_params)
     end
 
-    @tickets.each do |ticket|
-      ticket.location = current_admin.event.name if current_admin && current_admin.event
-      ticket.save
-    end
-
     @ticket = @tickets.first
     if @ticket.save
+      @tickets.each do |ticket|
+        ticket.location = current_admin.event.name if current_admin && current_admin.event
+        ticket.save
+      end
       redirect_to ticket_path(@ticket), notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@tickets[0].first_name}"
     else
       render :new
