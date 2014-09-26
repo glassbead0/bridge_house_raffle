@@ -8,8 +8,9 @@ class TicketsController < ApplicationController
   def index
     @q = Ticket.search(params[:q])
     @tickets = @q.result(distinct: true).paginate(page: params[:page], per_page: 100)
-
     @all_tickets = Ticket.all
+    @uniq_tickets = Ticket.all.uniq
+
     respond_to do |format|
       format.html
       format.csv { send_data @all_tickets.to_csv }
