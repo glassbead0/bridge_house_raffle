@@ -1,10 +1,10 @@
 <script type="text/javascript">
-//  var price = document.getElementById('price');
-//  var numberOfTickets = document.getElementById('number_of_tickets');
-//
-//  function updatPriceLabel(){
-//    price.value = numberOfTickets.value * 10
-//  }
+  var price = document.getElementById('price');
+  var numberOfTickets = document.getElementById('number_of_tickets');
+
+  function updatPriceLabel(){
+    price.value = numberOfTickets.value * 10
+  }
 
 
   function showHide() {
@@ -16,17 +16,11 @@
     }
   }
 
-  function updatePrice() {
-    numberOfTickets = document.getElementById('ticket_number_of_tickets');
-    amountPaid = document.getElementById('ticket_amount_paid');
-//    amountPaid.value = numberOfTickets * 10;
-  }
-
-  updatePrice();
-
-
 </script>
 
+<div class="page-header">
+  <h1 align="center">Buy a Raffle Ticket</h1>
+</div>
 
 <%= form_for(@ticket, :html => { :class => "form-horizontal" }) do |f| %>
   <% if @ticket.errors.any? %>
@@ -41,38 +35,6 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="bs-callout bs-callout-danger" id="hide_panel" style="visibility: visible">
-    <input type=button style="float: right" class='btn btn-default btn-sm' value="^" onclick="showHide();">
-
-    <div class="form-group row">
-      <%= f.label :payment_type, class: 'control-label col-sm-2' %>
-      <div class="col-sm-4">
-        <%= f.select :payment_type, options_for_select(%w(Square Cash Check Other)), class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <%= f.label :number_of_tickets, class: 'control-label col-sm-2' do %>
-        Number of Tickets
-      <% end %>
-      <div class="col-sm-4">
-        <%= f.select :number_of_tickets, options_for_select((1..100).to_a), onclick: 'updatePrice();', class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="row">
-      <%= f.label :amount_paid, class: 'control-label col-sm-2' do %>
-        Amount Paid
-      <% end %>
-      <div class="col-sm-2">
-        <div class="input-group">
-          <span class="input-group-addon">$</span>
-          <%= f.text_field :amount_paid, class: 'form-control' %>
-        </div><!-- /input-group -->
-      </div><!-- /.col-sm-4 -->
-    </div>
-  </div>
 
   <div class="bs-callout bs-callout-info">
     <div class="form-group">
@@ -141,6 +103,13 @@
 
   <div class="bs-callout bs-callout-info">
     <div class="form-group">
+      <%= f.label :number_of_tickets, nil, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-1">
+        <%= f.select :number_of_tickets, options_for_select((1..100).to_a), class: "form-control" %>
+      </div>
+
+      <%= f.hidden_field :payment_type, value: 'Wepay' %>
+
       <div class="col-sm-offset-0 col-sm-4">
         <%= f.submit 'Buy Tickets', :class => "btn btn-primary" %>
       </div>

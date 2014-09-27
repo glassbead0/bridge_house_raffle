@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     if !admin_signed_in?
-      redirect_to new_ticket_path, notice: 'nice try'
+      redirect_to ticket_new_wepay_path, notice: 'nice try'
     end
   end
 end

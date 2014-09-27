@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'thank_you/index'
 
   resources :tickets
+  get 'ticket/new_wepay' => 'tickets#new_wepay'
 
   resources :events
   # get 'start_event' => 'events#new'
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'tickets#new'
+  root 'tickets#new_wepay'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

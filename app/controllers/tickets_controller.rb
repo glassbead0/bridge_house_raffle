@@ -2,14 +2,14 @@ include ActionView::Helpers::TextHelper
 
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin, only: [:index, :edit, :update, :destroy, :set_payment_type]
+  before_action :require_admin, only: [:index, :edit, :update, :destroy, :new]
   # GET /tickets
   # GET /tickets.json
   def index
     @q = Ticket.search(params[:q])
     @tickets = @q.result(distinct: true).paginate(page: params[:page], per_page: 100)
     @all_tickets = Ticket.all
-    @uniq_tickets = Ticket.all.uniq
+    @uniq_tickets = Ticket.select(:email).uniq
 
     respond_to do |format|
       format.html
@@ -25,7 +25,10 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    #raise params.inspect
+    @ticket = Ticket.new
+  end
+
+  def new_wepay
     @ticket = Ticket.new
   end
 
