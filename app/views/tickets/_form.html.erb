@@ -8,18 +8,11 @@ function showHide() {
   }
 }
 
-$(document).ready(function() {
-  var numberOfTickets = document.getElementById('ticket_number_of_tickets').value;
+function updatePrice() {
+  var numberOfTickets = document.getElementById('number_of_tickets').value;
   var amountPaid = document.getElementById('ticket_amount_paid');
-
-
-  function updatePrice() {
-    amountPaid.value = numberOfTickets * 10 - Math.floor(numberOfTickets / 12) * 20;
-  }
-
-  updatePrice();
-});
-
+  amountPaid.value = numberOfTickets * 10 - Math.floor(numberOfTickets / 12) * 20;
+}
 
 </script>
 
@@ -117,8 +110,8 @@ $(document).ready(function() {
 
     <div class="form-group row">
       <%= f.label :payment_type, class: 'control-label col-sm-2' %>
-      <div class="col-sm-4">
-        <%= f.select :payment_type, options_for_select(%w(Square Cash Check Other)), class: 'form-control' %>
+      <div class="col-sm-2">
+        <%= select_tag :payment_type, options_for_select(%w(Square Cash Check Other)), class: 'form-control' %>
       </div>
     </div>
 
@@ -126,8 +119,8 @@ $(document).ready(function() {
       <%= f.label :number_of_tickets, class: 'control-label col-sm-2' do %>
         Number of Tickets
       <% end %>
-      <div class="col-sm-4">
-        <%= f.select :number_of_tickets, options_for_select((1..100).to_a), onchange: 'updatePrice();', class: 'form-control' %>
+      <div class="col-sm-2">
+        <%= select_tag :number_of_tickets, options_for_select((1..100).to_a), onchange: 'updatePrice();', class: 'form-control' %>
       </div>
     </div>
 
@@ -138,7 +131,7 @@ $(document).ready(function() {
       <div class="col-sm-2">
         <div class="input-group">
           <span class="input-group-addon">$</span>
-          <%= f.text_field :amount_paid, class: 'form-control' %>
+          <%= f.text_field :amount_paid, class: 'form-control', value: 10 %>
         </div><!-- /input-group -->
       </div><!-- /.col-sm-4 -->
     </div>
