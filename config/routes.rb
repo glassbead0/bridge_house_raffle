@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :tickets
   get 'ticket/new_wepay' => 'tickets#new_wepay'
 
+  get 'ticket/orders' => 'tickets#orders'
   resources :events
   # get 'start_event' => 'events#new'
   # post 'create_event' => 'events#create'

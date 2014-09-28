@@ -9,13 +9,16 @@ class TicketsController < ApplicationController
     @q = Ticket.search(params[:q])
     @tickets = @q.result(distinct: true).paginate(page: params[:page], per_page: 100)
     @all_tickets = Ticket.all
-    @uniq_tickets = Ticket.select(:email).uniq
 
     respond_to do |format|
       format.html
       format.csv { send_data @all_tickets.to_csv }
       format.xls { send_data @all_tickets.to_csv(col_sep: "\t") }
     end
+  end
+
+  def orders
+    @uniq_tickets = Ticket.group(:email).order(:id)
   end
 
   # GET /tickets/1

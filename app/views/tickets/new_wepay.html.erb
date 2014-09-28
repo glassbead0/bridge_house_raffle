@@ -1,24 +1,16 @@
 <script type="text/javascript">
 
-//  $(document).ready(function(){
-//    var price = document.getElementById('price');
-//    var numberOfTickets = document.getElementById('ticket_number_of_tickets').value;
-//
-//    function updatPriceLabel(){
-//      price.textContent = '$' + String(numberOfTickets*10 - Math.floor(numberOfTickets/12)*20);
-//    }
-//
-//    updatPriceLabel();
-//  });
-
   function updatePriceLabel() {
     var price = document.getElementById('price');
     var numberOfTickets = document.getElementById('number_of_tickets').value;
-    price.textContent = 'Cost: $' + String(numberOfTickets*10 - Math.floor(numberOfTickets/12)*20);
+    price.textContent = 'Total: $' + String(numberOfTickets*10 - Math.floor(numberOfTickets/12)*20);
   }
 
-
-
+function buy12() {
+  var numTickets = document.getElementById('number_of_tickets');
+  numTickets.value = 12;
+  updatePriceLabel();
+    }
 
   function showHide() {
     var panel = document.getElementById('hide_panel');
@@ -28,13 +20,12 @@
       panel.style.visibility = 'hidden';
     }
   }
-
-
-
 </script>
 
 <div class="page-header">
   <h1 align="center">Buy a Raffle Ticket</h1>
+  <h5 align="center">$10 each</h5>
+  <h5 align="center">12 for $100</h5>
 </div>
 
 <%= form_for(@ticket, :html => { :class => "form-horizontal" }) do |f| %>
@@ -117,6 +108,9 @@
   </div>
 
   <div class="bs-callout bs-callout-info">
+    <div class="col-sm-2 btn btn-default btn-lg" id="price" style="float: right">
+      Total: $10
+    </div>
     <div class="form-group">
       <%= f.label :number_of_tickets, nil, class: 'col-sm-2 control-label' %>
       <div class="col-sm-1" onchange="updatePriceLabel();">
@@ -125,18 +119,14 @@
       </div>
 
       <%= f.hidden_field :payment_type, value: 'Wepay' %>
-      <div class="col-sm-1 btn btn-default" id="price">
-        Cost: $10
-      </div>
       <div class="col-sm-offset-0 col-sm-2">
         <%= f.submit 'Buy Tickets', :class => "btn btn-success" %>
       </div>
-      <div class="alert alert-success alert-dismissable col-sm-3">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          Buy 12 tickets for $100
+      <div class="btn btn-info"onclick="buy12();">
+        Get 12 Tickets for $100
       </div>
-
     </div>
+
   </div>
 
 <% end %>

@@ -1,0 +1,8 @@
+<div class="page-header">
+  <%= link_to 'Show All', tickets_path, class: 'btn btn-primary' %>
+  <h1>Orders</h1>
+</div>
+
+<%# will_paginate @uniq_tickets, renderer: BootstrapPagination::Rails %>
+
+<%= render partial: 'table', locals: { tickets: @uniq_tickets} %>
