@@ -1,10 +1,23 @@
 <script type="text/javascript">
-  var price = document.getElementById('price');
-  var numberOfTickets = document.getElementById('number_of_tickets');
 
-  function updatPriceLabel(){
-    price.value = numberOfTickets.value * 10
+//  $(document).ready(function(){
+//    var price = document.getElementById('price');
+//    var numberOfTickets = document.getElementById('ticket_number_of_tickets').value;
+//
+//    function updatPriceLabel(){
+//      price.textContent = '$' + String(numberOfTickets*10 - Math.floor(numberOfTickets/12)*20);
+//    }
+//
+//    updatPriceLabel();
+//  });
+
+  function updatePriceLabel() {
+    var price = document.getElementById('price');
+    var numberOfTickets = document.getElementById('number_of_tickets').value;
+    price.textContent = 'Cost: $' + String(numberOfTickets*10 - Math.floor(numberOfTickets/12)*20);
   }
+
+
 
 
   function showHide() {
@@ -15,6 +28,8 @@
       panel.style.visibility = 'hidden';
     }
   }
+
+
 
 </script>
 
@@ -55,10 +70,10 @@
 
     <div class="form-group">
       <%= f.label :email, :class => "col-sm-2 control-label" %>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <%= f.text_field :email, :class => "form-control" %>
       </div>
-      <%= f.label :subscribe, 'Receive BH Emails', :class => "col-sm-2 control-label" %>
+      <%= f.label :subscribe, 'Receive BH Emails', :class => "col-sm-2 col-sm-offset-1 control-label" %>
       <div class="col-sm-4">
         <%= f.check_box :subscribe, :class => "form-control" %>
         <p id="subscribe-info">Uncheck to opt out of Bridgehouse emails</p>
@@ -104,16 +119,22 @@
   <div class="bs-callout bs-callout-info">
     <div class="form-group">
       <%= f.label :number_of_tickets, nil, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-1">
-        <%= f.select :number_of_tickets, options_for_select((1..100).to_a), class: "form-control" %>
+      <div class="col-sm-1" onchange="updatePriceLabel();">
+        <%# f.select :number_of_tickets, options_for_select((1..100).to_a), class: 'form-control' %>
+        <%= select_tag :number_of_tickets,  options_for_select((1..100).to_a), class: 'form-control' %>
       </div>
 
       <%= f.hidden_field :payment_type, value: 'Wepay' %>
-
-      <div class="col-sm-offset-0 col-sm-4">
-        <%= f.submit 'Buy Tickets', :class => "btn btn-primary" %>
+      <div class="col-sm-1 btn btn-default" id="price">
+        Cost: $10
       </div>
-      <div id="price">10</div>
+      <div class="col-sm-offset-0 col-sm-2">
+        <%= f.submit 'Buy Tickets', :class => "btn btn-success" %>
+      </div>
+      <div class="alert alert-success alert-dismissable col-sm-3">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          Buy 12 tickets for $100
+      </div>
 
     </div>
   </div>

@@ -15,3 +15,11 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+
+//  var price = document.getElementById('price');
+//  var numberOfTickets = document.getElementById('number_of_tickets');
+//
+//  function updatPriceLabel(){
+  //    price.value = numberOfTickets.value * 10
+  //  }

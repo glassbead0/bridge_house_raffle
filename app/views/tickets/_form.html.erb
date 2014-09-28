@@ -1,31 +1,28 @@
 <script type="text/javascript">
-//  var price = document.getElementById('price');
-//  var numberOfTickets = document.getElementById('number_of_tickets');
-//
-//  function updatPriceLabel(){
-//    price.value = numberOfTickets.value * 10
-//  }
-
-
-  function showHide() {
-    var panel = document.getElementById('hide_panel');
-    if (panel.style.visibility == 'hidden') {
-      panel.style.visibility = 'visible';
-    } else if (panel.style.visibility == 'visible') {
-      panel.style.visibility = 'hidden';
-    }
+function showHide() {
+  var panel = document.getElementById('hide_panel');
+  if (panel.style.visibility == 'hidden') {
+    panel.style.visibility = 'visible';
+  } else if (panel.style.visibility == 'visible') {
+    panel.style.visibility = 'hidden';
   }
+}
+
+$(document).ready(function() {
+  var numberOfTickets = document.getElementById('ticket_number_of_tickets').value;
+  var amountPaid = document.getElementById('ticket_amount_paid');
+
 
   function updatePrice() {
-    numberOfTickets = document.getElementById('ticket_number_of_tickets');
-    amountPaid = document.getElementById('ticket_amount_paid');
-//    amountPaid.value = numberOfTickets * 10;
+    amountPaid.value = numberOfTickets * 10 - Math.floor(numberOfTickets / 12) * 20;
   }
 
   updatePrice();
+});
 
 
 </script>
+
 
 
 <%= form_for(@ticket, :html => { :class => "form-horizontal" }) do |f| %>
@@ -41,38 +38,6 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="bs-callout bs-callout-danger" id="hide_panel" style="visibility: visible">
-    <input type=button style="float: right" class='btn btn-default btn-sm' value="^" onclick="showHide();">
-
-    <div class="form-group row">
-      <%= f.label :payment_type, class: 'control-label col-sm-2' %>
-      <div class="col-sm-4">
-        <%= f.select :payment_type, options_for_select(%w(Square Cash Check Other)), class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <%= f.label :number_of_tickets, class: 'control-label col-sm-2' do %>
-        Number of Tickets
-      <% end %>
-      <div class="col-sm-4">
-        <%= f.select :number_of_tickets, options_for_select((1..100).to_a), onclick: 'updatePrice();', class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="row">
-      <%= f.label :amount_paid, class: 'control-label col-sm-2' do %>
-        Amount Paid
-      <% end %>
-      <div class="col-sm-2">
-        <div class="input-group">
-          <span class="input-group-addon">$</span>
-          <%= f.text_field :amount_paid, class: 'form-control' %>
-        </div><!-- /input-group -->
-      </div><!-- /.col-sm-4 -->
-    </div>
-  </div>
 
   <div class="bs-callout bs-callout-info">
     <div class="form-group">
@@ -93,10 +58,10 @@
 
     <div class="form-group">
       <%= f.label :email, :class => "col-sm-2 control-label" %>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <%= f.text_field :email, :class => "form-control" %>
       </div>
-      <%= f.label :subscribe, 'Receive BH Emails', :class => "col-sm-2 control-label" %>
+      <%= f.label :subscribe, 'Receive BH Emails', :class => "col-sm-2 col-sm-offset-1 control-label" %>
       <div class="col-sm-4">
         <%= f.check_box :subscribe, :class => "form-control" %>
         <p id="subscribe-info">Uncheck to opt out of Bridgehouse emails</p>
@@ -141,13 +106,42 @@
 
   <div class="bs-callout bs-callout-info">
     <div class="form-group">
-      <div class="col-sm-offset-0 col-sm-4">
+      <div class="col-sm-offset-2 col-sm-4">
         <%= f.submit 'Buy Tickets', :class => "btn btn-primary" %>
       </div>
-      <div id="price">10</div>
+    </div>
+  </div>
 
+  <div class="bs-callout bs-callout-danger" id="hide_panel" style="visibility: visible">
+    <input type=button style="float: right" class='btn btn-warning btn-sm' value="Hide" onclick="showHide();">
+
+    <div class="form-group row">
+      <%= f.label :payment_type, class: 'control-label col-sm-2' %>
+      <div class="col-sm-4">
+        <%= f.select :payment_type, options_for_select(%w(Square Cash Check Other)), class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :number_of_tickets, class: 'control-label col-sm-2' do %>
+        Number of Tickets
+      <% end %>
+      <div class="col-sm-4">
+        <%= f.select :number_of_tickets, options_for_select((1..100).to_a), onchange: 'updatePrice();', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <%= f.label :amount_paid, class: 'control-label col-sm-2' do %>
+        Amount Paid
+      <% end %>
+      <div class="col-sm-2">
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <%= f.text_field :amount_paid, class: 'form-control' %>
+        </div><!-- /input-group -->
+      </div><!-- /.col-sm-4 -->
     </div>
   </div>
 
 <% end %>
-
