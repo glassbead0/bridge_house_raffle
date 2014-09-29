@@ -10,10 +10,12 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address => "smtp.sendgrid.net",
     :port => 587,
-    :domain => "heroku.com",
+    :domain => "mailerbridgehouseraffle.herokuapp.com",
     :authentication => :plain,
     :user_name => 'glassbead0',
-    :password => ENV['SENDGRID_PW']
+    :password => ENV['SENDGRID_PW'],
+    :enable_starttls_auto => true
+
   }
 
   # Code is not reloaded between requests.
