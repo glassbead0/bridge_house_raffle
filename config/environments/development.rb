@@ -19,13 +19,8 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => "smtp.sendgrid.net",
-    :port => 25,
-    :domain => "localhost:3000",
-    :authentication => :plain,
-    :user_name => 'glassbead0',
-    :password => ENV['SENDGRID_PW'],
-    :enable_starttls_auto => true
+    :address => "localhost",
+    :port => 1025
   }
 
   # Print deprecation notices to the Rails logger.
@@ -47,3 +42,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
+
+# BridgeHouseRaffle::Application.routes.draw do
+#   default_url_options host: 'locahost', port: '3000'
+# end
