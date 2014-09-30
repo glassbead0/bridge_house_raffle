@@ -1,7 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = { host: 'mailerbridgehouseraffle.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'bridgehouseraffle.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
@@ -10,7 +10,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address => "smtp.sendgrid.net",
     :port => 587,
-    :domain => "mailerbridgehouseraffle.herokuapp.com",
+    :domain => "bridgehouseraffle.herokuapp.com",
     :authentication => :plain,
     :user_name => 'glassbead0',
     :password => ENV['SENDGRID_PW'],
