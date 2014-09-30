@@ -7,10 +7,9 @@ class TicketsController < ApplicationController
   # GET /tickets.json
   def index
     @q = Ticket.search(params[:q])
-    @tickets = @q.result(distinct: true).paginate(page: params[:page], per_page: 100)
+    @tickets = @q.result(distinct: true).order(:id).paginate(page: params[:page], per_page: 100)
     @all_tickets = Ticket.all
 
-    @tickets_sold = @all_tickets.length
     @emails = Ticket.all.group_by { |t| t.email }
     @customers = @emails.length
 
