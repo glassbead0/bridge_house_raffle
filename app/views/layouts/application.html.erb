@@ -29,7 +29,7 @@
         <%= link_to "Bridge House Home Page", "http://boulderbridgehouse.org", :class => "navbar-brand", target: '_blank' %>
       </div>
       <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" id="dashboard" style="visibility: visible">
           <li class="active"><%= link_to 'Buy Tickets', ticket_new_wepay_path %></li>
           <%= render 'layouts/dashboard' %>
 

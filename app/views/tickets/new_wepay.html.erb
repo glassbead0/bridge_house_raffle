@@ -27,6 +27,7 @@ function buy12() {
   <h5 align="center">$10 each</h5>
   <h5 align="center">12 for $100</h5>
 </div>
+<p>* required</p>
 
 <%= form_for(@ticket, :html => { :class => "form-horizontal" }) do |f| %>
   <% if @ticket.errors.any? %>
@@ -45,7 +46,7 @@ function buy12() {
   <div class="bs-callout bs-callout-info">
     <div class="form-group">
 
-      <%= f.label :first_name, 'Name: First', :class => "col-sm-2 control-label" %>
+      <%= f.label :first_name, 'Name: First*', :class => "col-sm-2 control-label" %>
       <div class="col-sm-3">
         <%= f.text_field :first_name, :class => "form-control" %>
       </div>
@@ -53,14 +54,14 @@ function buy12() {
       <div class="col-sm-1">
         <%= f.text_field :middle_initial, class: 'form-control' %>
       </div>
-      <%= f.label :last_name, 'Last', :class => "col-sm-1 control-label" %>
+      <%= f.label :last_name, 'Last*', :class => "col-sm-1 control-label" %>
       <div class="col-sm-3">
         <%= f.text_field :last_name, :class => "form-control" %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :email, :class => "col-sm-2 control-label" %>
+      <%= f.label :email, :class => "col-sm-2 control-label" do %>Email*<% end %>
       <div class="col-sm-3">
         <%= f.text_field :email, :class => "form-control" %>
       </div>

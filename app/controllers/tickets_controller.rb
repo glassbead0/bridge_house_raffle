@@ -10,6 +10,10 @@ class TicketsController < ApplicationController
     @tickets = @q.result(distinct: true).paginate(page: params[:page], per_page: 100)
     @all_tickets = Ticket.all
 
+    @tickets_sold = @all_tickets.length
+    @emails = Ticket.all.group_by { |t| t.email }
+    @customers = @emails.length
+
     respond_to do |format|
       format.html
       format.csv { send_data @all_tickets.to_csv }
@@ -62,7 +66,8 @@ class TicketsController < ApplicationController
       end
       redirect_to ticket_path(@ticket), notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@tickets[0].first_name}"
     else
-      render :new
+      render :new if current_admin
+      render :new_wepay if !current_admin
     end
   end
 

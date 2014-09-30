@@ -9,8 +9,8 @@
   <% end %>
   <h1>All Purchased Tickets</h1>
 
-  <div class="btn btn-sm btn-default"><%= Ticket.all.length %> Tickets sold</div>
-  <div class="btn btn-sm btn-default"><%= Ticket.group(:email).length %> Customers</div>
+  <div class="btn btn-sm btn-default"><%= @tickets_sold %> Tickets sold</div>
+  <div class="btn btn-sm btn-default"><%= @customers %> Customers</div>
 </div>
 
 <%= search_form_for @q, class: 'form-horizontal' do |f| %>
