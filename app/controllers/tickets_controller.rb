@@ -18,7 +18,7 @@ class TicketsController < ApplicationController
   end
 
   def orders
-    @uniq_tickets = Ticket.group(:email).order(:id)
+    @uniq_tickets = Ticket.all.order(:id).group_by { |t| t.email }
   end
 
   # GET /tickets/1
