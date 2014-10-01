@@ -2,8 +2,8 @@ include ActionView::Helpers::TextHelper
 
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  # before_action :require_admin, only: [:index, :edit, :update, :destroy, :new]
   before_action :require_admin, except: [:new_wepay, :create, :show]
+
   # GET /tickets
   # GET /tickets.json
   def index

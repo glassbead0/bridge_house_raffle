@@ -1,10 +1,10 @@
 class Admins::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def create
-    if params[:bridge_house_pin].to_s == '5280'
+    if params[:bridge_house_pin].to_s == ENV['BRIDGEHOUSE_PIN']
       super
     else
-      redirect_to new_ticket_path, notice: 'Sorry, you can\'t create an account'
+      redirect_to root_path, notice: 'Sorry, wrong pin. you can\'t create an account'
     end
   end
 
