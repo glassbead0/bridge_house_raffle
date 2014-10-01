@@ -1,6 +1,10 @@
 class Ticket < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
 
+  validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/,
+    message: "not valid" }
+
+  validates :email, format: { without: /\s/, message: 'can\'t contain spaces' }
   # validate :address_xor_phone_number
 
 

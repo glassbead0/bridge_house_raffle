@@ -2,7 +2,8 @@ include ActionView::Helpers::TextHelper
 
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin, only: [:index, :edit, :update, :destroy, :new]
+  # before_action :require_admin, only: [:index, :edit, :update, :destroy, :new]
+  before_action :require_admin, except: [:new_wepay, :create, :show]
   # GET /tickets
   # GET /tickets.json
   def index
@@ -59,12 +60,13 @@ class TicketsController < ApplicationController
 
     @ticket = @tickets.first
     if @ticket.save
+      @email = @ticket.email
+      Recipt.ticket_recipt(@ticket).deliver
       @tickets.each do |ticket|
         ticket.location = current_admin.event.name if current_admin && current_admin.event
         ticket.save
       end
-      Recipt.ticket_recipt(@ticket).deliver
-      redirect_to ticket_path(@ticket), notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@tickets[0].first_name}"
+      redirect_to "/tickets/#{@ticket.id}?email=#{@email}", notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@ticket.first_name}"
     else
       render :new if current_admin
       render :new_wepay if !current_admin

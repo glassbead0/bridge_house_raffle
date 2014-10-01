@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     if !admin_signed_in?
-      redirect_to ticket_new_wepay_path, notice: 'nice try'
+      redirect_to root_path, notice: 'You are not authorized to do that. Please by a ticket as repentence for trying such things. '
     end
   end
 end

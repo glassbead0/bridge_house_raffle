@@ -24,6 +24,16 @@
     updatePrice();
   }
 
+  function lastFourField() {
+    var field = document.getElementById('last_four');
+    var payment_type = document.getElementById('payment_type');
+    if (payment_type.value == 'Square') {
+      field.style.visibility = 'visible';
+    } else {
+      field.style.visibility = 'hidden';
+    }
+  }
+
 
 
 </script>
@@ -133,7 +143,10 @@
     <div class="form-group row">
       <%= f.label :payment_type, class: 'control-label col-sm-2' %>
       <div class="col-sm-2">
-        <%= select_tag :payment_type, options_for_select(%w(Square Cash Check Other)), class: 'form-control' %>
+        <%= select_tag :payment_type, options_for_select(%w(Square Cash Check Other)), onchange: 'lastFourField();', class: 'form-control' %>
+      </div>
+      <div class="col-sm-2" id="last_four" style="visibility: visible">
+        <%= f.text_field :last_four_digits_of_card, class: 'form-control', placeholder: 'Last 4 digits of Credit card' %>
       </div>
     </div>
 
