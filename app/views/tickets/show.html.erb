@@ -33,8 +33,15 @@
 
 </dl>
 <div align="center">
-  <%= link_to ticket_new_wepay_path, class: 'btn btn-success btn-lg' do %>
-    <span class="glyphicon glyphicon-home"></span>
-    Buy more tickets
+  <% if current_admin %>
+    <%= link_to new_ticket_path, class: 'btn btn-success btn-lg' do %>
+      <span class="glyphicon glyphicon-home"></span>
+      Buy more tickets
+    <% end %>
+  <% else %>
+    <%= link_to ticket_new_wepay_path, class: 'btn btn-success btn-lg' do %>
+      <span class="glyphicon glyphicon-home"></span>
+      Buy more tickets
+    <% end %>
   <% end %>
 </div>

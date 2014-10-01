@@ -1,0 +1,62 @@
+<style>
+  .bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+  }
+  .bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  .bs-callout p:last-child {
+    margin-bottom: 0;
+  }
+  .bs-callout code {
+    border-radius: 3px;
+  }
+  .bs-callout+.bs-callout {
+    margin-top: -5px;
+  }
+  .bs-callout-success {
+    border-left-color: #5cb85c;
+    background-color: #dff0d8;
+  }
+  .bs-callout-success h4 {
+    color: #5cb85c;
+  }
+  .col-sm-4 {
+    width: 33.3333333%;
+  }
+
+
+</style>
+
+<p>Hi <%= "#{@ticket.first_name.titleize} #{@ticket.last_name.titleize}" %>,</p> <br/>
+<p>Thanks for buying a raffle ticket. You purchased <%= @num %> ticket<% if @num > 1 %>s<% end %> For a total of $<%= "%0.2f" % [@ticket.amount_paid] %>. You paid with <%= @ticket.payment_type %>. </p>
+<p>The drawing will be held on October 3rd at the Bridge House annual fundraising event at the Rembrandt Yard in Boulder.</p>
+<p>Should you be the lucky winner of one of our prizes, you will receive an email or phone call with further instructions. Thanks for supporting Bridge House!</p>
+<p>See below for your ticket<% if @num > 1 %>s<% end %>.</p>
+
+
+  <div class="bs-callout bs-callout-success col-sm-4">
+    <!--<i class="fa fa-ticket fa-5x"></i>-->
+
+    <div class="btn btn-default">
+      <% if @num == 1 %>
+        <h4>Ticket # <%= @ticket.id %></h4>
+      <% else %>
+        <h4>Ticket #s <%= @ticket.id %> - <%= @num + @ticket.id - 1 %></h4>
+      <% end %>
+    </div>
+    <br/>
+    <ul>
+      <li><%= "#{@ticket.first_name.titleize} #{@ticket.last_name.titleize}"  %></li>
+      <li><%= @ticket.email %></li>
+      <% if @ticket.phone_number %><li><%= @ticket.phone_number %></li><% end %>
+      <% if @num > 1 %><li><%= @num.to_s + ' Tickets' %></li><% end %>
+      <li><%= 'Amount Paid: $%0.2f' % [@ticket.amount_paid] %></li>
+    </ul>
+  </div>
+

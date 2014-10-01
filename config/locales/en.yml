@@ -32,7 +32,5 @@ en:
               email:
                 blank: "is required for a recipt. You can opt out of all Bridge House emails if you choose."
   recipt:
-    recipt_wepay:
-      subject: 'Raffle Ticket Recipt'
-    recipt_other:
+    ticket_recipt:
       subject: 'Raffle Ticket Recipt'

@@ -1,0 +1,22 @@
+
+Hi <%= "#{@ticket.first_name.titleize} #{@ticket.last_name.titleize}" %>,
+Thanks for buying a raffle ticket. You purchased <%= @num %> ticket<% if @num > 1 %>s<% end %> For a total of $<%= "%0.2f" % [@ticket.amount_paid] %>. You paid with <%= @ticket.payment_type %>. 
+The drawing will be held on October 3rd at the Bridge House annual fundraising event at the Rembrandt Yard in Boulder.
+Should you be the lucky winner of one of our prizes, you will receive an email or phone call with further instructions. Thanks for supporting Bridge House!
+See below for your ticket.
+
+<% if @num == 1 %>
+  Ticket # <%= @ticket.id %>
+<% else %>
+  Ticket #s <%= @ticket.id %> - <%= @num + @ticket.id - 1 %>
+<% end %>
+
+<%= "#{@ticket.first_name.titleize} #{@ticket.last_name.titleize}"  %>
+<%= @ticket.email %>
+<%= @ticket.phone_number %>
+<% if @num > 1 %>
+  <%= @num.to_s + ' Tickets' %>
+<% end %>
+<%= 'Amount Paid: %0.2f' % [@ticket.amount_paid] %>
+  
+

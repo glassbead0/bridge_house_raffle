@@ -1,7 +1,7 @@
 class Ticket < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
 
-  validate :address_xor_phone_number
+  # validate :address_xor_phone_number
 
 
   private
