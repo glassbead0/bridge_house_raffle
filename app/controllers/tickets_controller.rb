@@ -63,6 +63,7 @@ class TicketsController < ApplicationController
         ticket.location = current_admin.event.name if current_admin && current_admin.event
         ticket.save
       end
+      Recipt.recipt_wepay(@ticket).deliver
       redirect_to ticket_path(@ticket), notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@tickets[0].first_name}"
     else
       render :new if current_admin
