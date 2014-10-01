@@ -66,7 +66,7 @@ class TicketsController < ApplicationController
         ticket.location = current_admin.event.name if current_admin && current_admin.event
         ticket.save
       end
-      redirect_to "/tickets/#{@ticket.id}?email=#{@email}", notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@ticket.first_name}"
+      redirect_to tickets_path(@ticket), notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@ticket.first_name}"
     else
       render :new if current_admin
       render :new_wepay if !current_admin

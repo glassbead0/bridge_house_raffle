@@ -1,39 +1,67 @@
+<style>
+  .bs-callout-success {
+  border-left-color: #5cb85c;
+  background-color: #dff0d8;
+  }
+</style>
+
 <div class="page-header">
 
   <h1>Thank You!</h1>
-  <h4>You will receive an email at <%= params[:email] %> to confirm your purchase shortly.</h4>
+  <h4>You will receive an email at <%= @ticket.email %> to confirm your purchase shortly.</h4>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>First name:</dt>
-  <dd><%= @ticket.first_name %></dd>
 
-  <dt>Last name:</dt>
-  <dd><%= @ticket.last_name %></dd>
+<div class="bs-callout bs-callout-success col-sm-6">
+  <i class="fa fa-ticket fa-5x"></i>
 
-  <dt>Email:</dt>
-  <dd><%= @ticket.email %></dd>
+  <div class="btn btn-default">
+    <% if @num == 1 %>
+      <h4>Ticket # <%= @ticket.id %></h4>
+    <% else %>
+      <h4>Ticket #s <%= @ticket.id %> - <%= @num + @ticket.id - 1 %></h4>
+    <% end %>
+  </div>
 
-  <dt>Subscribe:</dt>
-  <dd><%= @ticket.subscribe %></dd>
+  <dl class="dl-horizontal">
+    <dt>First name:</dt>
+    <dd><%= @ticket.first_name %></dd>
 
-  <dt>Address line one:</dt>
-  <dd><%= @ticket.address_line_one %></dd>
+    <dt>Last name:</dt>
+    <dd><%= @ticket.last_name %></dd>
 
-  <dt>Address line two:</dt>
-  <dd><%= @ticket.address_line_two %></dd>
+    <dt>Email:</dt>
+    <dd><%= @ticket.email %></dd>
 
-  <dt>City:</dt>
-  <dd><%= @ticket.city %></dd>
+    <dt>Subscribe:</dt>
+    <dd><%= @ticket.subscribe %></dd>
 
-  <dt>State:</dt>
-  <dd><%= @ticket.state %></dd>
+    <dt>Address line one:</dt>
+    <dd><%= @ticket.address_line_one %></dd>
 
-  <dt>Zip code:</dt>
-  <dd><%= @ticket.zip_code %></dd>
+    <dt>Address line two:</dt>
+    <dd><%= @ticket.address_line_two %></dd>
 
+    <dt>City:</dt>
+    <dd><%= @ticket.city %></dd>
 
-</dl>
+    <dt>State:</dt>
+    <dd><%= @ticket.state %></dd>
+
+    <dt>Zip code:</dt>
+    <dd><%= @ticket.zip_code %></dd>
+
+    <dt>Phone Number:</dt>
+    <dd><%= @ticket.phone_number %></dd>
+
+    <dt>Number of Tickets:</dt>
+    <dd><%= @ticket.number_of_tickets %></dd>
+
+    <dt>Amount Paid:</dt>
+    <dd><%= @ticket.amount_paid %></dd>
+
+  </dl>
+</div>
 <div align="center">
   <% if current_admin %>
     <%= link_to new_ticket_path, class: 'btn btn-success btn-lg' do %>
