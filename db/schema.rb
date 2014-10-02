@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925185119) do
+ActiveRecord::Schema.define(version: 20141002020244) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140925185119) do
     t.string   "payment_type"
     t.decimal  "amount_paid"
     t.string   "last_four_digits_of_card"
+    t.integer  "order_number"
   end
 
 end

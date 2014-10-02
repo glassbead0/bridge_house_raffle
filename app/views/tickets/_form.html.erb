@@ -1,11 +1,9 @@
 <script type="text/javascript">
-  function showHide(id) {
+  function hide(id) {
     var panel = document.getElementById(id);
-    if (panel.style.visibility == 'hidden') {
-      panel.style.visibility = 'visible';
-    } else if (panel.style.visibility == 'visible') {
-      panel.style.visibility = 'hidden';
-    }
+    panel.style.visibility = 'hidden';
+    document.getElementById('last_four').style.visibility = 'hidden';
+
   }
 
   function updatePrice() {
@@ -37,14 +35,6 @@
 
 
 </script>
-
-<div class="page-header">
-  <h1 align="center">Buy a Raffle Ticket</h1>
-  <h5 align="center">$10 each</h5>
-  <h5 align="center">12 for $100</h5>
-</div>
-<p>* required</p>
-
 
 <%= form_for(@ticket, :html => { :class => "form-horizontal" }) do |f| %>
   <% if @ticket.errors.any? %>
@@ -78,7 +68,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :email, :class => "col-sm-2 control-label" do %>Email**<% end %>
+      <%= f.label :email, :class => "col-sm-2 control-label" do %>Email*<% end %>
       <div class="col-sm-3">
         <%= f.text_field :email, :class => "form-control" %>
       </div>
@@ -114,7 +104,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :phone_number, :class => "col-sm-2 control-label" do %>Phone Number**<% end %>
+      <%= f.label :phone_number, :class => "col-sm-2 control-label" %>
       <div class="col-sm-4">
         <%= f.text_field :phone_number, :class => "form-control" %>
       </div>
@@ -138,7 +128,7 @@
   </div>
 
   <div class="bs-callout bs-callout-danger" id="hide_panel" style="visibility: visible">
-    <input type=button style="float: right" class='btn btn-warning btn-sm' value="Hide" onclick="showHide('hide_panel'); showHide('dashboard');">
+    <input type=button style="float: right" class='btn btn-warning btn-sm' value="Hide" onclick="hide('hide_panel'); hide('dashboard');">
 
     <div class="form-group row">
       <%= f.label :payment_type, class: 'control-label col-sm-2' %>

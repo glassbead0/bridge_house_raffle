@@ -10,6 +10,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
+      <th>Order Number</th>
       <th>Tickets</th>
       <th>First name</th>
       <th>MI</th>
@@ -34,6 +35,7 @@
     <% @uniq_tickets.each do |email, tickets| %>
 
       <tr>
+        <td><%= tickets[0].order_number %></td>
         <% if tickets[0].number_of_tickets > 1 %>
           <td><%= tickets[0].id %> - <%= tickets[0].number_of_tickets.to_i + tickets[0].id - 1 %></td>
         <% else %>
@@ -53,7 +55,7 @@
         <td><%= tickets[0].location %></td>
         <td><%= tickets[0].payment_type %></td>
         <td><%= tickets[0].number_of_tickets %></td>
-        <td><%= tickets[0].amount_paid %></td>
+        <td><%= '%0.2f' % [tickets[0].amount_paid] %></td>
         <td><%= tickets[0].last_four_digits_of_card %></td>
       </tr>
     <% end %>

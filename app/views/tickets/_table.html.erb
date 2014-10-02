@@ -45,7 +45,7 @@
       <td><%= ticket.location %></td>
       <td><%= ticket.payment_type %></td>
       <td><%= ticket.number_of_tickets %></td>
-      <td><%= ticket.amount_paid %></td>
+      <td><%= '%0.2f' % [ticket.amount_paid] %></td>
       <td><%= ticket.last_four_digits_of_card %></td>
       <td><%= link_to 'Show', ticket %></td>
       <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>

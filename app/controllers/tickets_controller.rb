@@ -22,7 +22,7 @@ class TicketsController < ApplicationController
   end
 
   def orders
-    @uniq_tickets = Ticket.all.order(:id).group_by { |t| t.email }
+    @uniq_tickets = Ticket.all.order(:id).group_by { |t| t.order_number }
   end
 
   # GET /tickets/1
@@ -48,12 +48,16 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @tickets = []
+    order_number = 1
+    order_number = Ticket.last.order_number + 1 unless Ticket.all.count == 0
     number_of_tickets = params[:number_of_tickets].to_i
 
     number_of_tickets.times do |num|
       @tickets[num] = Ticket.new(ticket_params)
       @tickets[num].number_of_tickets = n = params[:number_of_tickets]
       @tickets[num].amount_paid = (n.to_i)*10 - 20*((n.to_i)/12)
+      @tickets[num].order_number = order_number
+      @tickets[num].location = current_admin.event.name if current_admin && current_admin.event
       unless @tickets[num].payment_type
         @tickets[num].payment_type = params[:payment_type]
       end
@@ -61,12 +65,10 @@ class TicketsController < ApplicationController
 
     @ticket = @tickets.first
     if @ticket.save
-      @email = @ticket.email
-      Recipt.ticket_recipt(@ticket).deliver
       @tickets.each do |ticket|
-        ticket.location = current_admin.event.name if current_admin && current_admin.event
         ticket.save
       end
+      Recipt.ticket_recipt(@ticket).deliver
       redirect_to ticket_path(@ticket), notice: "Thank you for buying #{pluralize(number_of_tickets, 'raffle ticket')} #{@ticket.first_name}"
     else
       render :new if current_admin

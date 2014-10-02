@@ -58,7 +58,7 @@
     <dd><%= @ticket.number_of_tickets %></dd>
 
     <dt>Amount Paid:</dt>
-    <dd><%= @ticket.amount_paid %></dd>
+    <dd><%= '%0.2f' % [@ticket.amount_paid] %></dd>
 
   </dl>
 </div>
