@@ -28,6 +28,7 @@ class TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
+    @num = @ticket.number_of_tickets
   end
 
   # GET /tickets/new
