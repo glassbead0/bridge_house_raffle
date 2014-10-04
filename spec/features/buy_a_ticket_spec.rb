@@ -17,6 +17,12 @@ feature 'buy a ticket' do
 
     click_button 'Buy Tickets'
 
+    expect(ActionMailer::Base.deliveries).to have(1).email
     expect(page).to have_text "Thank you for buying 1 raffle ticket Aaron"
+    expect(page).to have _text "You will receive an email at glassbead@gmail.com to confirm your purchase shortly."
+
+    click_button 'Buy more tickets'
+
+    expect(page).to_not have_text 'Payment type'
   end
 end

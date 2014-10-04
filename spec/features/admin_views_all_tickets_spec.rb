@@ -4,8 +4,8 @@ feature 'admin can see all tickets' do
   scenario 'cant see list if not admin' do
     visit '/tickets'
 
-    expect(page).to have_text 'nice try'
-    expect(page).to_not have_text 'Listing tickets'
+    expect(page).to have_text 'not authorized'
+    expect(page).to_not have_text 'All Purchased Tickets'
   end
 
   scenario 'admin can see all tickets' do
@@ -19,6 +19,6 @@ feature 'admin can see all tickets' do
 
     click_link 'All Tickets'
 
-    expect(page).to have_text 'Listing tickets'
+    expect(page).to have_text 'All Purchased Tickets'
   end
 end

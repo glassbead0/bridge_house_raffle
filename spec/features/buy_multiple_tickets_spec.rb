@@ -12,5 +12,6 @@ feature 'buy multiple tickets' do
       expect(page).to have_text 'Thank you for buying 12 raffle tickets Aaron'
     }.to change(Ticket, :count).by(12)
 
+    expect(ActionMailer::Base.deliveries).to have(1).email
   end
 end

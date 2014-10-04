@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
 
 #subscribe-info {
@@ -64,12 +65,14 @@
 }
 .bs-callout-warning {
   border-left-color: #f0ad4e;
+  background-color: #fffaf5;
 }
 .bs-callout-warning h4 {
   color: #f0ad4e;
 }
 .bs-callout-info {
   border-left-color: #5bc0de;
+  background-color: #fafaff;
 }
 .bs-callout-info h4 {
   color: #5bc0de;

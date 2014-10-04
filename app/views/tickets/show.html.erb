@@ -1,6 +1,5 @@
 <style>
-  .bs-callout-success {
-  border-left-color: #5cb85c;
+  .bs-callout-ticket {
   background-color: #dff0d8;
   }
 </style>
@@ -12,16 +11,21 @@
 </div>
 
 
-<div class="bs-callout bs-callout-success col-sm-6">
-  <i class="fa fa-ticket fa-5x"></i>
+<div class="bs-callout bs-callout-success bs-callout-ticket col-xs-12 col-sm-8 col-md-6">
 
   <div class="btn btn-default">
     <% if @num == 1 %>
       <h4>Ticket # <%= @ticket.id %></h4>
-    <% else %>
+      <i class="fa fa-ticket fa-3x"></i>
+  <% else %>
       <h4>Ticket #s <%= @ticket.id %> - <%= @num + @ticket.id - 1 %></h4>
-    <% end %>
+      <i class="fa fa-ticket fa-2x"></i>
+      <i class="fa fa-ticket fa-2x"></i>
+      <i class="fa fa-ticket fa-2x"></i>
+  <% end %>
   </div>
+  <br/><br/>
+
 
   <dl class="dl-horizontal">
     <dt>First name:</dt>
@@ -58,7 +62,7 @@
     <dd><%= @ticket.number_of_tickets %></dd>
 
     <dt>Amount Paid:</dt>
-    <dd><%= '%0.2f' % [@ticket.amount_paid] %></dd>
+    <dd><%= '$%0.2f' % [@ticket.amount_paid] %></dd>
 
   </dl>
 </div>
