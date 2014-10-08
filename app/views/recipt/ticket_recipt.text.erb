@@ -1,3 +1,6 @@
+THIS RAFFLE IS IN TEST MODE
+THERE IS NO ACTIVE RAFFLE AND THE BELOW TICKET IS ONLY A TEST TICKET
+THERE ARE NO PRISES AND THIS TICKET HAS NO VALUE
 
 Hi <%= "#{@ticket.first_name.titleize} #{@ticket.last_name.titleize}" %>,
 Thanks for buying a raffle ticket. You purchased <%= @num %> ticket<% if @num > 1 %>s<% end %> For a total of $<%= "%0.2f" % [@ticket.amount_paid] %>. You paid with <%= @ticket.payment_type %>. 
