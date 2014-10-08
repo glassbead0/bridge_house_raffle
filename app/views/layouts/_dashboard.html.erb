@@ -8,9 +8,9 @@
 </ul>
 
 <ul class="nav navbar-nav navbar-right">
-  <% if current_admin.event %>
+  <% if admin_signed_in? && current_admin.event %>
     <li><%= link_to "End #{current_admin.event.name}", event_path(current_admin.event), method: 'delete', data: { confirm: 'Are you sure?' } %></li>
-  <% else %>
+  <% elsif admin_signed_in? %>
     <li><%= link_to 'Start Event', new_event_path %></li>
   <% end %>
   <% if admin_signed_in? %>
